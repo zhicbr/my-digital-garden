@@ -4,3 +4,107 @@
 body[data-slug="index"] .content-meta {
   display: none;
 }
+
+/* ==========================================
+   自定义时间线 (Timeline) 样式
+========================================== */
+.timeline-component {
+  margin-top: 2rem;
+  
+  .timeline-group {
+    margin-bottom: 3rem;
+  }
+
+  /* 年/月 大标题 */
+  .timeline-year-month {
+    font-size: 1.4rem;
+    color: var(--secondary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px dashed var(--lightgray);
+  }
+
+  /* 时间轴的主线 */
+  .timeline-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0 0.5rem;
+    border-left: 3px solid var(--lightgray); 
+  }
+
+  /* 每一个时间节点 */
+  .timeline-item {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+
+    /* 画时间轴上的那个圆点 */
+    &::before {
+      content: '';
+      position: absolute;
+      left: -0.45rem;
+      top: 0.2rem;
+      width: 0.7rem;
+      height: 0.7rem;
+      background-color: var(--tertiary);
+      border-radius: 50%;
+      border: 3px solid var(--light);
+      box-shadow: 0 0 0 2px var(--lightgray); 
+    }
+  }
+
+  /* 日期 */
+  .timeline-date {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gray);
+    margin-bottom: 0.4rem;
+    letter-spacing: 1px;
+  }
+
+  /* 笔记链接标题 */
+  .timeline-content a {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--dark);
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--secondary);
+    }
+  }
+}
+
+/* 标签容器排版 */
+  .timeline-tags {
+    list-style: none;
+    padding: 0;
+    margin: 0.6rem 0 0 0; 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* 取消 li 的默认边距防止排版错乱 */
+  .timeline-tags li {
+    margin: 0;
+  }
+
+  /* 单个标签样式：强制优先级 */
+  .timeline-content a.timeline-tag {
+    display: inline-block;
+    font-size: 0.8rem;
+    line-height: 1.2;
+    color: var(--dark) !important; /* 强制默认状态下的文字颜色 */
+    background-color: var(--lightgray) !important;
+    padding: 0.2rem 0.7rem;
+    border-radius: 1rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: var(--light) !important; /* 强制悬浮时文字变成亮色/白色 */
+      background-color: var(--secondary) !important; /* 悬浮时背景变为主色调 */
+    }
+  }

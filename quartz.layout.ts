@@ -21,6 +21,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.ArticleTitle(),
     Component.ContentMeta(),
     Component.TagList(),
+    Component.Timeline(),
   ],
   left: [
     Component.PageTitle(),
@@ -35,7 +36,14 @@ export const defaultContentPageLayout: PageLayout = {
         { Component: Component.ReaderMode() },
       ],
     }),
-    Component.Explorer(),
+    Component.Explorer({
+      sortFn: (a, b) => {
+        if (a.data?.slug === "timeline") return -1
+        if (b.data?.slug === "timeline") return 1
+        
+        return a.displayName.localeCompare(b.displayName)
+      },
+    }),
   ],
   right: [
     Component.Graph(),
@@ -59,7 +67,14 @@ export const defaultListPageLayout: PageLayout = {
         { Component: Component.Darkmode() },
       ],
     }),
-    Component.Explorer(),
+    Component.Explorer({
+      sortFn: (a, b) => {
+        if (a.data?.slug === "timeline") return -1
+        if (b.data?.slug === "timeline") return 1
+        
+        return a.displayName.localeCompare(b.displayName)
+      },
+    }),
   ],
   right: [],
 }
