@@ -1,20 +1,14 @@
 ---
 title: HOMEPAGE 
+date: 2026-02-15
 ---
 这是 zhicbr 的个人主页，主要用于存放技术笔记、博客和归档。
 
-### 目录
+该项目网址：[HOMEPAGE](https://garden.zhicbr.space/)
 
-* **技术与工作**
-  * [[后端开发]]
-  * [[架构设计]]
-  * [[报错与排查记录]]
-* **知识库**
-  * [[阅读笔记]]
-  * [[外语学习]]
-* **生活**
-  * [[日常随笔]]
-  * [[年度复盘]]
+该项目vercel网址：[vercel](https://vercel.com/2819579394-qqcoms-projects/zhicbr-quartz-blog)
+
+
 
 ---
 [GitHub](https://github.com/zhicbr) 
