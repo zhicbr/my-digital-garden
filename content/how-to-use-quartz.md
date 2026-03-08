@@ -2,8 +2,33 @@
 title: How to use Quartz 
 date: 2026-02-17
 tags: 
-  - 教程
+  - tutorial
+  - quartz	
+  - blog
 ---
+
+## 前提准备
+
+### 软件安装
+
+git
+obsidian
+vscode(推荐)
+typora(推荐)
+
+### 账号注册
+
+github
+vercel(或者netlify,cloudflare)
+aliyun
+
+以下内容，出现[:small_red_triangle:]​为必做
+
+### 必须解决的问题
+
+图片存储、链接格式/前缀
+
+
 
 ## Quartz 
 
@@ -17,7 +42,7 @@ tags:
 npx quartz sync
 ```
 
-本质是自动执行以下三个步骤，推送到github云端后，会触发Vercel的自动构建：
+这条命令的本质是自动执行以下三个 Git 步骤。当代码被推送到 GitHub 云端后，便会自动触发 Vercel 的页面构建：
 
 ```
 git add .
@@ -31,9 +56,11 @@ git push
 npx quartz sync -m "修复了主页的外部链接图标，并添加了 Bento Box 布局"
 ```
 
+如果push不了，在命令后再执行git push即可。
 
+### [:small_red_triangle:]本地初始化 Quartz 项目
 
-### 本地初始化 Quartz 项目
+`my-digital-garden`换成自己的仓库名称
 
 ```
 git clone https://github.com/jackyzha0/quartz.git my-digital-garden
@@ -43,17 +70,21 @@ npm i
 
 
 
-### 与 Obsidian 建立连接
+### [:small_red_triangle:]与 Obsidian 建立连接
 
 #### 打开仓库
 
-使用Obsidian打开Quartz 项目中的 content 文件夹为一个仓库即可。
+在 Obsidian 中，选择「打开文件夹作为库（Open folder as vault）」，并选中 Quartz 项目里的 content 文件夹即可
 
 #### 新建index.md
 
 在content下新建一个index.md文件，作为网站首页。
 
+#### 新建笔记（md）
 
+md文件命名采用烤肉串式命名（连字符命名法），如how-to-use-quartz.md
+
+前置元数据至少有：title，date，tags
 
 ### 本地预览网站
 
@@ -61,11 +92,11 @@ npm i
 npx quartz build --serve
 ```
 
-
+如果渲染有问题，例如没有顶部的路径，Ctrl+C，然后重新运行上述命令即可。
 
 ### Quartz 稍作修改
 
-见：`feat: init my own digital garden`
+详见 Git 提交记录：`feat: init my own digital garden`
 
 #### pageTitle
 
@@ -79,7 +110,7 @@ npx quartz build --serve
 
 路径：`Quartz\my-digital-garden\quartz.layout.ts`
 
-删除 `links: { }`里的去掉 GitHub 和 Discord 链接
+删除 `links: { }`里的GitHub 和 Discord 链接
 
 
 
@@ -106,7 +137,7 @@ body[data-slug="index"] .content-meta {
 
 
 
-### 推送到github
+### [:small_red_triangle:]​推送到github
 
 #### 解绑原作者仓库
 
@@ -144,7 +175,7 @@ Obsidian仅仅做管理，编辑使用Typora，因此要统一链接图片格式
 
 **关闭维基链接：**
 
-找到 `使用 WIKI链接`，将其**关闭**。以后在 Obsidian 里拖入图片或链接文件时，它会自动生成 Typora 能识别的标准 []() 语法。
+找到 `使用 WIKI链接`，将其**关闭**。以后在 Obsidian 里拖入图片或链接文件时，它会自动生成 Typora 能识别的标准` [how-to-use-quartz](how-to-use-quartz.md)` 语法。
 
 **设置相对路径：**
 
@@ -156,7 +187,7 @@ Obsidian仅仅做管理，编辑使用Typora，因此要统一链接图片格式
 
 ### 默认应用打开
 
-设置->快捷键，进行如下设置
+设置->快捷键，进行如下设置（默认没有，需要自己设置）：
 
 默认应用打开：
 
@@ -164,11 +195,33 @@ Obsidian仅仅做管理，编辑使用Typora，因此要统一链接图片格式
 
  
 
+### 插件Link Converter
+
+可将wiki链接、markdown（相对路径，绝对路径，最短路径）相互转换
+
+#### 安装
+
+在第三方插件
+
+#### 使用
+
+选择markdown格式的相对路径，绝对路径，最短路径之一
+
+设置--> 第三方插件--> Converted Link Format选择（relevant，absolute，shortest）
+
+单个文件转换：右键下方
+
+整个仓库文件转换：
+
+`Ctrl + P` 打开命令面板，输入`Link Converter`（实际上输入L即可）
+
+选择Vault: Links to Markdown，或者Vault: Links to Wiki，即可转换为md格式或Wiki格式。
+
 ## Vercel
 
-### 授权并导入github仓库
+### [:small_red_triangle:]​授权并导入github仓库
 
-使用登录Vercel
+登录Vercel
 
 进入 Vercel 的控制台主页。点击右上角黑色的 **Add New...** 按钮，选择 **Project**。
 
@@ -181,10 +234,6 @@ Application Preset选择`other`
 Build Command填写`npx quartz build`
 
 Install Command填写`npm install`
-
-项目页：https://vercel.com/2819579394-qqcoms-projects
-
-本项目：https://vercel.com/2819579394-qqcoms-projects/my-digital-garden
 
 ### 使用自己的域名绑定项目
 
@@ -214,7 +263,297 @@ Save后会显示红色警告Invalid Configuration，因为此时阿里云还没�
 
 点击确定即可。
 
+稍等片刻即可访问https://garden.zhicbr.space/
 
+> [!CAUTION]
+>
+> Vercel 官方分配的默认服务器 IP（通常是 `76.76.21.21`）因为承载了全球海量的免费项目，其中混杂了一些违规内容，导致**这个 IP 已经被国内的防火墙（GFW）重度污染甚至直接封锁了。**
+>
+> 如果不使用魔法，国内访问奇慢无比。
+>
+> 在aliyun的域名解析控制台，将记录值改成以下内容（专门针对中国大陆优化的备用解析地址）：
+>
+> **CNAME:** `cname-china.vercel-dns.com`
+>
+> 更好的选择是将博客也部署在cloudflare，Cloudflare 的边缘节点（CDN）在全球（包括对国内的连通性）比 Vercel 稳健得多，但是目前这个可以接受，如果以后也被墙了，再迁移。
+
+
+
+### [:small_red_triangle: ]添加 vercel.json 配置文件
+
+Quartz 默认采用了不带扩展名的简洁链接设计（Clean URL，无技术后缀且语义化，便于阅读和 SEO 优化）。但在 Vercel 部署时，这类无后缀链接容易被错误重定向到 404 页面。添加此配置可以强制 Vercel 精确匹配底层的 .html 文件，而不是显示404页面。
+
+```
+{
+  "cleanUrls": true,
+  "trailingSlash": false
+}
+```
+
+
+
+## Timeline（时间线）组件
+
+### 设计
+
+单独创建一个timeline.md，入口有两种选择
+
+方法一：类似index.md，使用一个单独的按钮进入
+
+方法二：通过在目录里置顶timeline.md。目前选择方法二。
+
+### 代码改动
+
+#### 新建文件
+
+- **`content/timeline.md`**（或你的笔记库对应目录）
+  - **作用**：时间线的物理入口页面。只需包含核心元数据`title: Timeline`、 `isTimeline: true`，用于向系统宣告它的特殊身份。
+- **`quartz/components/Timeline.tsx`**
+  - **作用**：时间线的核心逻辑“大脑”。负责拉取全站笔记、剔除自身、按时间倒序排列、进行“年月”与“日”的双重分组，并最终渲染出带有标题和标签的 HTML 结构。
+
+#### 修改文件
+
+- **`quartz/components/index.ts`**
+  - **作用**：组件注册表。在此处导出了新写的组件，让 Quartz 系统能够认识并使用它。
+- **`quartz.layout.ts`**
+  - **作用**：全局布局与目录规则。
+  - 在 `defaultContentPageLayout` 的正文上方（`beforeBody`）注入了 `Component.Timeline()`。
+  - 重写了两个 `Component.Explorer()` 的排序逻辑（`sortFn`），利用底层属性 `a.data?.slug === "timeline"` 实现了左侧文件树的“绝对置顶”。
+- **`quartz/styles/custom.scss`**
+  - **作用**：视觉“精装修”。添加了时间轴的垂直主线、高亮圆点节点、清晰的排版间距，以及解决了悬浮黑屏问题的“小药丸”标签样式。
+
+### 相关连接
+
+[Quartz时间线组件](https://gemini.google.com/app/888f67656a4e14c3)
+
+[feat: 新增全局时间线 (Timeline) 视图及相关组件配置 · zhicbr/my-digital-garden@12e7383](https://github.com/zhicbr/my-digital-garden/commit/12e7383b41698d5373410cd0f222d13e4a95e8e9)
+
+
+
+## AI辅助状态标记组件
+
+### **核心逻辑**
+
+- **数据层 (Markdown 侧)：** 摒弃了会污染全局知识图谱的 Tag 标签，改用笔记头部的 YAML Frontmatter 属性（`ai-assisted: true`）作为唯一的触发开关，实现了“文档元数据”与“内容分类”的严格分离。
+- **逻辑层 (TypeScript 侧)：** 新增自定义组件 `AIBadge.tsx`，在 Quartz 的构建阶段（Build step）读取当前文件的 `fileData.frontmatter`。
+- **渲染层 (UI/CSS 侧)：** 若检测到 AI 辅助状态为真，则渲染包含 W3C 标准 SVG 矢量图标和响应式 CSS 样式（支持亮暗色主题变量、胶囊圆角、悬停上浮）的 HTML 节点；若为假，则返回 `null`，确保普通页面不产生多余的 DOM 结构。
+
+### **代码改动**
+
+#### 新增文件
+
+- `quartz/components/AIBadge.tsx`：实现核心逻辑、DOM 结构与专属 CSS 样式的封装。
+
+#### 修改文件
+
+- `quartz/components/index.ts`：将新组件注册并暴露给全局上下文。
+- `quartz.layout.ts`：在 `defaultContentPageLayout` 中编排页面 UI 结构，将该组件精准挂载至文章标签下方。
+
+### 相关链接
+
+[Quartz Ai辅助内容标注](https://gemini.google.com/app/5ccfc3260220ae2b)
+
+[feat: 新增基于 YAML 属性的 AI 辅助状态徽章组件 · zhicbr/my-digital-garden@31fd64c](https://github.com/zhicbr/my-digital-garden/commit/31fd64c0d7a349615da8a5e679508feb02d3564f)
+
+
+
+## 仓库名称命名（blog、images）
+
+博客和图片的仓库分别改成以下名称
+
+```
+https://github.com/zhicbr/zhicbr-quartz-blog
+https://github.com/zhicbr/zhicbr-quartz-images
+```
+
+仓库改名见[如何改名github仓库](how-to-rename-github-repository.md)
+
+
+
+## 图片存储
+
+https://gemini.google.com/app/a660cecc24af6571
+
+### Cloudflare 关联 GitHub 仓库并绑定域名
+
+#### GitHub 准备仓库
+
+新建仓库`zhicbr-quartz-images`
+
+手动上传一张图片`test.png`，确保仓库不是空的。
+
+#### 在 Cloudflare 创建 Pages 项目
+
+登录 Cloudflare，点击左侧菜单的 **Workers 和 Pages**。
+
+点击 **create application** -> 不要直接创建worker，点击下方的`Looking to deploy Pages？**Get started**` -> **连接到 Git**。
+
+选择Import an existing Git repository，选择你刚才创建的图片仓库。
+
+**构建设置**：全部保持默认（因为我们只是存图，不需要编译），直接点击 **保存并部署**。
+
+<img src="https://img.mrx111.site/assets/20260306201110919.png" alt="image-20260306163419774" style="zoom: 33%;" />
+
+
+
+#### 将 Aliyun 域名接入 Cloudflare（域名托管）
+
+略，见笔记[]() 
+
+
+
+#### 在 Pages 中绑定子域名
+
+在 CF 回到你刚才创建的 Pages 项目界面。
+
+点击 **Custom domains（自定义域）** 选项卡 -> **Set up a custom domain(设置自定义域)**。
+
+输入你预想的图床子域名，例如 `img.example.com`。
+
+点击下一步。如果你的域名已经成功托管在 CF，它会提示“将自动为你添加 CNAME 记录”。这也是直接托管在cloudflare的好处。
+
+点击 **activate domain激活域**。稍等一会。
+
+激活成功后，显示Active
+
+![image-20260306163851151](https://img.mrx111.site/assets/20260306200830726.png)
+
+#### 完成状态检查
+
+一旦显示“已激活”，访问 `https://img.example.com/test.png`，只要能看到图，就成功.
+
+### 本地配置 PicGo
+
+#### PicGo介绍
+
+PicGo 是一个跨平台的桌面端图床管理软件。你可以把它理解为一个“无情的传图搬运工”：
+
+- **没有它时**：你得先打开浏览器登录 GitHub，手动上传图片，复制链接，再回到 Obsidian 粘贴。这套流程非常繁琐。
+- **有了它后**：它在你的电脑后台静默运行，支持快速将图片上传到远端。你只需复制一张图片，它就会自动把剪贴板里的图片“搬运”到你的仓库里，然后瞬间把生成好的网址链接还给你。
+
+#### 安装PicGo
+
+官网：https://picgo.app/
+
+github：[Molunerfinn/PicGo: :rocket: The Ultimate Image Uploader for Efficient Creators. Supports Obsidian, Typora, VS Code etc. and 60+ image hosting services (S3, GitHub, Cloudflare R2, Imgur, Aliyun OSS...). Paste, upload, done.](https://github.com/Molunerfinn/PicGo)
+
+安装完成后打开，先在PicGo setting里讲语言改成简体中文
+
+#### 获取Github的Token
+
+PicGo 需要你的授权才能把图片推送到你的 GitHub 仓库。
+
+1. 登录 GitHub，点击右上角你的头像，选择 **Settings**（设置）。
+2. 在左侧菜单栏拉到最底端，点击 **Developer settings**（开发者设置）。
+3. 展开左侧的 **Personal access tokens**，点击 **Tokens (classic)**。
+4. 点击右上角的 **Generate new token** -> **Generate new token (classic)**。
+5. 输入密码
+6. **设置 Token 的属性**：
+   - **Note（备注）**：随便填，比如 `PicGo-Upload`。
+   - **Expiration（有效期）**：建议选择 **No expiration**（永不过期），这样以后不用每年都来重新配置一次。
+   - **Select scopes（权限范围）**：**这是最重要的一步！** 找到并勾选 **`repo`**（Full control of private repositories），勾选这一个主选项就足够了。
+7. 滑到页面最底部，点击 **Generate token**。
+8. 页面会生成一串很长的字符（比如 `ghp_xxxxxx...`）。**请立刻复制并保存好它！**（出于安全机制，一旦刷新页面这串代码就再也看不到了）。
+
+#### PicGo 图床配置
+
+开你电脑上安装好的 PicGo。
+
+1. 在 PicGo 的左侧菜单找到 **图床设置** -> 选择 **GitHub 图床**。
+2. 按照以下格式准确填写你的信息：
+
+- **设定仓库名**：根据你之前截图里的信息，填写你的用户名和仓库名：`zhicbr/zhicbr-quartz-images`
+
+- **设定分支名**：目前 GitHub 默认的主分支通常是 main，填入：`main`
+
+- **设定 Token**：粘贴你刚才在第一步复制的那串 `ghp_` 开头的密钥。
+- **指定存储路径**：这是图片上传后在你仓库里存放的文件夹名称。为了方便管理，建议填入（注意后面要带上斜杠 `/`）：
+
+```
+assets/
+```
+
+- **设定自定义域名（最核心）**：将你刚刚在 Cloudflare 激活的那个子域名填进去。**必须带上 `https://`**。假设你的域名是 `img.example.com`，那就填入：
+
+```
+https://img.example.com
+```
+
+点击 **确定** 保存，然后点击 **设为默认图床**。
+
+#### 测试上传
+
+在电脑上随便截一张图（让图片保存在剪贴板里）。
+
+打开 PicGo 的 **上传区**，点击“剪贴板图片上传”。
+
+留意电脑右下角的弹窗提示。如果提示“上传成功”，你去随便找个文本框粘贴一下，如果粘贴出来的链接是你漂亮的自定义域名（例如 `https://img.你的域名.com/images/xxx.png`），并且能在浏览器里打开，那么恭喜你，图床配置完美收工！
+
+
+
+#### PicGo设置
+
+打开 **时间戳重命名** 的开关。（放弃“上传前重命名”，防止打断心流）。
+
+打开 **开机自启** 的开关。
+
+#### 设置 Typora
+
+打开 Typora，点击菜单栏 `文件` -> `偏好设置` -> `图像`。
+
+**插入图片时...**：下拉选择 `上传图片`。
+
+勾选下面这三个选项：`对本地位置的图片应用上述规则`、`对网络位置的图片应用上述规则`、`自动转义图片 URL`。
+
+**上传服务设定**：选择 `PicGo (app)`。
+
+**PicGo 路径**：点击右侧的文件图标，找到你电脑上安装的 PicGo 程序的路径。
+
+点击**“验证图片上传选项”**，如果弹出一个绿色提示成功的窗口，Typora 就彻底搞定了！
+
+> [!CAUTION]
+>
+> 鉴于上述设置在任何地方的md文档里，图片都会上传，故不采用。依然选择复制图片到./assets文件夹
+>
+> 上传服务设定保持即可。
+>
+> 不采用根据YAML设置自动上传图片，其一太麻烦，其二Quartz有顶部元数据YAML。
+
+> [!NOTE]
+>
+> **采用写完博客统一上传的方式：**
+>
+> **日常写作**：所有的图片都安安静静地保存在你的本地电脑里。
+>
+> **写完博客准备发布时：**点击菜单栏 `格式` -> `图像` -> `上传所有本地图像`
+>
+> 这时，软件才会呼叫 PicGo，把这篇特定的、准备公开的博客里的所有本地图片，一次性全传到云端并替换链接。
+>
+
+
+
+#### 设置 Obsidian
+
+在 Obsidian 的“第三方插件”市场里搜索并安装 **Image auto upload **。
+
+启用该插件，并点击插件旁边的齿轮进入设置界面。
+
+**Default uploader（默认上传器）**：选择 `PicGo`。
+
+下方的设置基本保持默认即可。它是通过本地端口（`http://127.0.0.1:36677`）和 PicGo 通信的，只要你的 PicGo 在后台运行，它就能自动连上。
+
+> [!CAUTION]
+>
+> 关闭剪切板自动上传
+>
+
+需要上传时，Ctrl+P打开命令面板，输入`upload`即可。选择：`image auto upload：upload all images`
+
+
+
+
+
+# =============================================
 
 ## Quartz 项目结构&原理
 
@@ -225,7 +564,7 @@ Save后会显示红色警告Invalid Configuration，因为此时阿里云还没�
 它的核心使命只有一个：**完美无缝地将你的 Obsidian 个人知识库，转化为一个可以通过浏览器访问的“数字花园 (Digital Garden)”。**
 
 - **传统博客的逻辑是“时间流”：** 就像一本日记，按照时间顺序排列，旧文章很容易被遗忘。
-- **Quartz 的逻辑是“网状知识”：** 它原生支持 Obsidian 的 `[[双向链接]]` 语法。它鼓励你把笔记打碎，通过链接像神经元一样连接起来，最终在网页上生成一个极其炫酷的**知识关系图谱（Graph View）**。
+- **Quartz 的逻辑是“网状知识”：** 它原生支持 Obsidian 的 双向链接 语法。它鼓励你把笔记打碎，通过链接像神经元一样连接起来，最终在网页上生成一个极其炫酷的**知识关系图谱（Graph View）**。
 
 ### 现代技术栈 
 
@@ -307,4 +646,129 @@ permalink: /my-cool-post
 
 ​	默认路径为：本地的文件树结构映射为网站 URL	
 
-​	自定义路径：将（如果标题或者文件名是中文）中文网址改为自定义的英文
+​	自定义路径：如果笔记标题或文件名是中文，可以通过此属性将其强制指定为易读的英文路径。
+
+
+
+
+
+## 一些问题
+
+### 热更新缓存处理
+
+大多数问题都可能是本地开发服务器的热更新（Hot Reload）在处理缓存时出了问题，页面没有及时渲染。
+
+此时`Ctrl+C`关闭，再运行`npx quartz build --serve`即可
+
+
+
+### 幽灵链接
+
+使用md链接示例时请使用反引号包裹，示例：`[how-to-use-quartz](how-to-use-quartz.md)`。
+
+否则会被解析为双向链接，链接至index.md
+
+因为圆括号 `()` 里面是空的，转换成底层的 HTML 代码就是 `<a href=""></a>`（一个指向空地址的链接），而Quartz 的文件树里，根目录 `/` 唯一对应的实体文件就是入口主页 `index.md`。
+
+ Quartz 理所当然地认为，这篇笔记链接到了根目录index.md，于是 Graph View 里就能看到这个幽灵链接。
+
+### 关于时区
+
+不用设置时区，具体见[Quartz时间线组件](https://gemini.google.com/app/888f67656a4e14c3)
+
+### 外部链接图标
+
+写外部链接时，不要漏掉链接文本而只写链接地址，否则只会有一个链接图标，而没有文字
+
+还有，链接地址不要写本地地址
+
+### 
+
+## 新建笔记注意事项
+
+### 文件名格式
+
+采用烤串命名法（注意必须是小写）
+
+### 不要写重复名称
+
+文件名在整个笔记系统中都不要重复
+
+### 元数据引号后需要空格否则会报错
+
+始终确保属性块在最顶部。
+
+属性块内为YAML 语法，非常严格，冒号 `:` 后面必须跟一个空格。
+
+### Tags 标签格式
+
+tag必须小写，否则会导致tag大写的文件在tag界面无法显示。
+
+## ToDo
+
+### 文件夹
+
+将所有笔记分类，应该弄哪些文件夹？
+
+### [:white_check_mark: ]图片
+
+#### 存储
+
+使用github仓库，部署到cloudflare，利用cf的全球cdn
+
+#### 命名
+
+图片如何命名？放弃单独明明，采用时间戳
+
+### [:white_check_mark: ]链接
+
+文件夹，移动文件时是否有影响
+
+到底用wiki链接，还是markdown标准格式？md用相对路径，还是最短路径？
+
+obsidian默认wiki链接，但是Typora不支持，只支持md格式。
+
+相对路径的话，如果有文件夹需要移动，则在obsidian里移动可以自动修改相对路径，但是如果在资源管理器里移动就不行。
+
+解决：
+
+> 通过链接转换插件`Link Converter`实现随意转换，只需要保证文件名不重复即可。
+>
+> 既然可以随意转换，而且Quartz 无论那种格式都能解析，故链接问题解决。
+
+### 光标cursor
+
+设置鼠标在该网页的光标
+
+### custom样式
+
+设置自己的css：在文件custom.scss
+
+是否可以实现渲染自己设置的md样式？达到更好的效果
+
+### [:white_check_mark: ]Timeline
+
+一个timeline界面，专门用于按照时间线查看
+
+单独创建一个timeline.md，入口有两种选择
+
+方法一：类似index.md，使用一个单独的按钮进入
+
+方法二：通过在目录里置顶timeline.md。目前选择方法二。
+
+
+
+### [:white_check_mark: ]标记ai辅助
+
+通过YAML元数据标注，实现相关组件，渲染对应状态徽章。
+
+### [:white_check_mark: ]博客/图片仓库命名
+
+
+
+
+
+
+
+## 总结
+

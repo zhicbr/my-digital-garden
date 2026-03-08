@@ -9,3 +9,6 @@ tsconfig.tsbuildinfo
 private/
 .replit
 replit.nix
+
+# 忽略本地图片文件夹
+/content/assets/

@@ -56,3 +56,74 @@ tags:
 
 关于输入法的详细内容，见：[windows上的语言和输入法](language-and-input-on-windows.md)，以及gemini对话：[gemini-解决Windows默认日语输入法](https://gemini.google.com/app/a2946a6651f37256)
 
+
+
+## 删除百度网盘自带智能看图
+
+### 删除注册表内容
+
+删除注册表内以下内容：
+
+```
+HKEY_CLASSES_ROOT\BaiduNetdiskImageViewerAssociations
+HKEY_CURRENT_USER\Software\Baidu\BaiduNetdiskImageViewer
+HKEY_CURRENT_USER\Software\RegisteredApplications\BaiduNetdiskImageViewer
+```
+
+
+
+### 删除文件夹内容
+
+```
+%APPDATA%\baidu\BaiduNetdisk\module\ImageViewer
+```
+
+删除ImageViewer文件夹
+
+
+
+## 查看电池健康度
+
+cmd输入以下内容：
+
+```
+powercfg /batteryreport
+```
+
+屏幕上会提示“电池使用时间报告已保存到...”，后面跟着一个文件路径（通常是 `C:\Users\你的用户名\battery-report.html`）。
+
+```
+C:\Users\28195>powercfg /batteryreport
+电池使用时间报告已保存到文件路径 C:\Users\28195\battery-report.html。
+C:\Users\28195>
+```
+
+查看该文件的Installed batteries部分，如下：
+
+```
+Installed batteries
+Information about each currently installed battery
+BATTERY 1
+NAME	HB4593R1ECW-22S
+MANUFACTURER	SUNWODA
+SERIAL NUMBER	1620
+CHEMISTRY	LION
+DESIGN CAPACITY	55,237 mWh
+FULL CHARGE CAPACITY	47,528 mWh
+CYCLE COUNT	486
+```
+
+ \[ \text{电池健康度} = \frac{\text{FULL CHARGE CAPACITY}}{\text{DESIGN CAPACITY}} \times 100\% \] 
+
+代入数据： \[ \frac{47528}{55237} \times 100\% \approx 86.0\% \] 
+
+CYCLE COUNT（循环次数）：486 次
+
+
+
+
+
+
+
+## BitLocker
+
