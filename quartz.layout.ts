@@ -22,7 +22,10 @@ export const defaultContentPageLayout: PageLayout = {
     Component.ContentMeta(),
     Component.TagList(),
     Component.AIBadge(),
-    Component.Timeline(),
+    Component.ConditionalRender({
+      component: Component.Timeline(),
+      condition: (page) => page.fileData.slug === "00-Meta/timeline" || page.fileData.slug === "timeline",
+    }),
   ],
   left: [
     Component.PageTitle(),
@@ -37,15 +40,10 @@ export const defaultContentPageLayout: PageLayout = {
         { Component: Component.ReaderMode() },
       ],
     }),
+    Component.TimelineLink(),
     Component.Explorer({
       filterFn: (node) => {
         return node.displayName !== "00-Meta"
-      },
-      sortFn: (a, b) => {
-        if (a.data?.slug === "timeline") return -1
-        if (b.data?.slug === "timeline") return 1
-        
-        return a.displayName.localeCompare(b.displayName)
       },
     }),
   ],
@@ -71,15 +69,10 @@ export const defaultListPageLayout: PageLayout = {
         { Component: Component.Darkmode() },
       ],
     }),
+    Component.TimelineLink(),
     Component.Explorer({
       filterFn: (node) => {
         return node.displayName !== "00-Meta"
-      },
-      sortFn: (a, b) => {
-        if (a.data?.slug === "timeline") return -1
-        if (b.data?.slug === "timeline") return 1
-        
-        return a.displayName.localeCompare(b.displayName)
       },
     }),
   ],

@@ -26,6 +26,7 @@ import ConditionalRender from "./ConditionalRender"
 import Timeline from "./Timeline"
 import AIBadge from "./AIBadge"
 import QuotesBanner from "./QuotesBanner"
+import TimelineLink from "./TimelineLink"
 
 export {
   ArticleTitle,
@@ -56,4 +57,5 @@ export {
   Timeline, 
   AIBadge,
   QuotesBanner,
+  TimelineLink,
 }

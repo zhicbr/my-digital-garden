@@ -7,7 +7,18 @@ const Timeline: QuartzComponent = ({ allFiles, fileData, displayClass }: QuartzC
 
   // 1. 获取文件并按时间倒序
   const sortedFiles = allFiles
-    .filter((f) => !f.frontmatter?.isTimeline) 
+    .filter((f) => {
+      // 1. 排除时间线本身的页面 
+      if (f.frontmatter?.isTimeline) return false
+      
+      // 2. 排除 00-Meta 文件夹下的所有文件
+      if (f.slug?.startsWith("00-Meta/")) return false
+
+      // 3. 排除一下系统的首页 
+      if (f.slug === "index") return false
+
+      return true
+    }) 
     .sort((a, b) => {
       const dateA = a.dates?.created ? a.dates.created.getTime() : 0
       const dateB = b.dates?.created ? b.dates.created.getTime() : 0
