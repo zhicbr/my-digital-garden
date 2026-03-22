@@ -38,6 +38,9 @@ export const defaultContentPageLayout: PageLayout = {
       ],
     }),
     Component.Explorer({
+      filterFn: (node) => {
+        return node.displayName !== "00-Meta"
+      },
       sortFn: (a, b) => {
         if (a.data?.slug === "timeline") return -1
         if (b.data?.slug === "timeline") return 1
@@ -69,6 +72,9 @@ export const defaultListPageLayout: PageLayout = {
       ],
     }),
     Component.Explorer({
+      filterFn: (node) => {
+        return node.displayName !== "00-Meta"
+      },
       sortFn: (a, b) => {
         if (a.data?.slug === "timeline") return -1
         if (b.data?.slug === "timeline") return 1
