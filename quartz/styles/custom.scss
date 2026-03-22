@@ -108,3 +108,106 @@ body[data-slug="index"] .content-meta {
       background-color: var(--secondary) !important; /* 悬浮时背景变为主色调 */
     }
   }
+
+/* 1. 强制抹除 Quartz 默认给顶部预留的巨大空白容器边距 */
+.center .page-header {
+  margin-top: 0 !important; 
+}
+
+/* 2. 全站引言横幅 */
+.quotes-banner {
+  position: relative;
+  width: 100%;
+  margin: 0.2rem auto 0.2rem auto; 
+  padding: 1.5rem 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  z-index: 1;
+
+  /* 报纸排版*/
+  border-top: 2px solid var(--dark);
+  border-bottom: 1px solid var(--gray);
+}
+
+/* 顶部标签 */
+.quotes-banner::before {
+  content: "QUOTE";
+  position: absolute;
+  top: -0.6rem; /* 刚好卡在上边框的线上 */
+  left: 2rem; /* 靠左，打破居中的死板 */
+  background: var(--light); /* 用背景色遮住一截边框线，形成断点 */
+  padding: 0 0.8rem;
+  font-family: "Courier New", Consolas, monospace;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--tertiary);
+  letter-spacing: 0.15em;
+}
+
+/* 底纹 */
+.quotes-banner::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(150, 150, 150, 0.04) 2px, /* 透明度极低 */
+    rgba(150, 150, 150, 0.04) 4px
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* 印刷体  */
+.quotes-content {
+  font-family: "Georgia", "Noto Serif SC", "Songti SC", serif; 
+  font-size: 1.15rem; 
+  font-style: italic;
+  font-weight: 600; /* 加重字重 */
+  color: var(--dark);
+  letter-spacing: 0.08em; 
+  line-height: 1.8;
+  max-width: 85%;
+  transition: opacity 0.4s ease;
+  
+  /* 左红右蓝极弱阴影。*/
+  text-shadow: 
+    1px 0px 0px rgba(255, 0, 0, 0.15), 
+    -1px 0px 0px rgba(0, 150, 255, 0.15);
+}
+
+/* 闪烁光标 */
+.quotes-content::after {
+  content: " █";
+  font-family: monospace;
+  font-size: 0.8em;
+  color: var(--tertiary);
+  opacity: 0.8;
+  animation: terminal-blink 1.2s step-end infinite;
+}
+
+/* 光标闪烁动画 */
+@keyframes terminal-blink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.8; }
+}
+
+/* 适配移动端 */
+@media all and (max-width: 800px) {
+  .quotes-banner {
+    margin: 1rem auto 2rem auto;
+  }
+  .quotes-banner::before {
+    left: 50%;
+    transform: translateX(-50%); 
+  }
+  .quotes-content {
+    font-size: 1rem;
+    text-align: left; 
+  }
+}

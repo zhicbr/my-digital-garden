@@ -25,6 +25,7 @@ import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
 import Timeline from "./Timeline"
 import AIBadge from "./AIBadge"
+import QuotesBanner from "./QuotesBanner"
 
 export {
   ArticleTitle,
@@ -54,4 +55,5 @@ export {
   ConditionalRender,
   Timeline, 
   AIBadge,
+  QuotesBanner,
 }
