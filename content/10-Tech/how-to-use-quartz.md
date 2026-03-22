@@ -1,5 +1,5 @@
 ---
-title: How to use Quartz 
+title: 如何用Quartz搭建静态博客
 date: 2026-02-17
 tags: 
   - tutorial
@@ -60,10 +60,10 @@ npx quartz sync -m "修复了主页的外部链接图标，并添加了 Bento Bo
 
 ### [:small_red_triangle:]本地初始化 Quartz 项目
 
-`my-digital-garden`换成自己的仓库名称
+`your-repo-name`换成自己的仓库名称
 
 ```
-git clone https://github.com/jackyzha0/quartz.git my-digital-garden
+git clone https://github.com/jackyzha0/quartz.git your-repo-name
 
 npm i
 ```
@@ -100,7 +100,7 @@ npx quartz build --serve
 
 #### pageTitle
 
-`路径：Quartz\my-digital-garden\quartz.config.ts`
+quartz.config.ts`
 
 将网站左上角的名字`Quartz 4`修改为自己的标识
 
@@ -108,7 +108,7 @@ npx quartz build --serve
 
 #### links
 
-路径：`Quartz\my-digital-garden\quartz.layout.ts`
+quartz.layout.ts`
 
 删除 `links: { }`里的GitHub 和 Discord 链接
 
@@ -116,15 +116,13 @@ npx quartz build --serve
 
 #### footer
 
-路径：`Quartz\my-digital-garden\quartz\components\Footer.tsx`
+\quartz\components\Footer.tsx`
 
 删除`Created with Quartz`，改成自己的
 
 
 
 #### custom.scss
-
-路径：`Quartz\my-digital-garden\quartz\styles\custom.scss`
 
 添加自己的样式
 
@@ -148,7 +146,7 @@ git remote remove origin
 #### 绑定自己的仓库
 
 ```
-git remote add origin https://github.com/zhicbr/my-digital-garden.git
+git remote add origin https://github.com/your-repo-name/your-repo-name.git
 ```
 
 ####  提交并推送
@@ -184,6 +182,10 @@ Obsidian仅仅做管理，编辑使用Typora，因此要统一链接图片格式
 **统一图片存放文件夹：**
 
 找到 `附件默认存放路径`，选择 **指定的附件文件夹**，附件文件夹路径设置为`assets`，与Typora保持一致。
+
+### 自动更新内部链接
+
+设置--> 文件与链接--> 打开`始终更新内部链接`
 
 ### 默认应用打开
 
@@ -241,7 +243,7 @@ Install Command填写`npm install`
 
 进入Domains，点击Add Existing
 
-在弹窗中填写自己的域名：`garden.zhicbr.space`,其中garden是子域名
+在弹窗中填写自己的域名：`blog.your-domain.com`,其中blog是子域名
 
 Save后会显示红色警告Invalid Configuration，因为此时阿里云还没进行配置，Vercel 暂时还找不到这个域名。
 
@@ -251,23 +253,23 @@ Save后会显示红色警告Invalid Configuration，因为此时阿里云还没�
 
 #### Aliyun
 
-[云解析DNS](https://dnsnext.console.aliyun.com/authoritative/domains/zhicbr.space)
+[云解析DNS](https://dnsnext.console.aliyun.com/authoritative/domains/your-domain.com)
 
 云解析 DNS--->权威域名解析--->解析设置，点击添加记录
 
 记录类型Type，选择`CNAME`（即将域名指向另外一个域名）
 
-主机记录选择`garden`（不用写后面的域名）
+主机记录选择`blog`（不用写后面的域名）
 
 记录值选择刚才的`Value`
 
 点击确定即可。
 
-稍等片刻即可访问https://garden.zhicbr.space/
+稍等片刻即可访问https://garden.your-domain.com/
 
 > [!CAUTION]
 >
-> Vercel 官方分配的默认服务器 IP（通常是 `76.76.21.21`）因为承载了全球海量的免费项目，其中混杂了一些违规内容，导致**这个 IP 已经被国内的防火墙（GFW）重度污染甚至直接封锁了。**
+> Vercel 默认分配的全球边缘节点对中国大陆的访问链路可能不稳定或速度较慢，这是国际网络互连中常见的现象。
 >
 > 如果不使用魔法，国内访问奇慢无比。
 >
@@ -322,12 +324,6 @@ Quartz 默认采用了不带扩展名的简洁链接设计（Clean URL，无技�
 - **`quartz/styles/custom.scss`**
   - **作用**：视觉“精装修”。添加了时间轴的垂直主线、高亮圆点节点、清晰的排版间距，以及解决了悬浮黑屏问题的“小药丸”标签样式。
 
-### 相关连接
-
-[Quartz时间线组件](https://gemini.google.com/app/888f67656a4e14c3)
-
-[feat: 新增全局时间线 (Timeline) 视图及相关组件配置 · zhicbr/my-digital-garden@12e7383](https://github.com/zhicbr/my-digital-garden/commit/12e7383b41698d5373410cd0f222d13e4a95e8e9)
-
 
 
 ## AI辅助状态标记组件
@@ -349,12 +345,6 @@ Quartz 默认采用了不带扩展名的简洁链接设计（Clean URL，无技�
 - `quartz/components/index.ts`：将新组件注册并暴露给全局上下文。
 - `quartz.layout.ts`：在 `defaultContentPageLayout` 中编排页面 UI 结构，将该组件精准挂载至文章标签下方。
 
-### 相关链接
-
-[Quartz Ai辅助内容标注](https://gemini.google.com/app/5ccfc3260220ae2b)
-
-[feat: 新增基于 YAML 属性的 AI 辅助状态徽章组件 · zhicbr/my-digital-garden@31fd64c](https://github.com/zhicbr/my-digital-garden/commit/31fd64c0d7a349615da8a5e679508feb02d3564f)
-
 
 
 ## 仓库名称命名（blog、images）
@@ -362,23 +352,23 @@ Quartz 默认采用了不带扩展名的简洁链接设计（Clean URL，无技�
 博客和图片的仓库分别改成以下名称
 
 ```
-https://github.com/zhicbr/zhicbr-quartz-blog
-https://github.com/zhicbr/zhicbr-quartz-images
+https://github.com/your-repo-name/your-repo-name-quartz-blog
+https://github.com/your-repo-name/your-repo-name-quartz-images
 ```
 
-仓库改名见[如何改名github仓库](how-to-rename-github-repository.md)
+仓库改名见[如何改名github仓库](10-Tech/how-to-rename-github-repository.md)
 
 
 
 ## 图片存储
 
-https://gemini.google.com/app/a660cecc24af6571
+
 
 ### Cloudflare 关联 GitHub 仓库并绑定域名
 
 #### GitHub 准备仓库
 
-新建仓库`zhicbr-quartz-images`
+新建仓库`your-repo-name-quartz-images`
 
 手动上传一张图片`test.png`，确保仓库不是空的。
 
@@ -388,7 +378,7 @@ https://gemini.google.com/app/a660cecc24af6571
 
 点击 **create application** -> 不要直接创建worker，点击下方的`Looking to deploy Pages？**Get started**` -> **连接到 Git**。
 
-选择Import an existing Git repository，选择你刚才创建的图片仓库。
+# 选择Import an existing Git repository，选择你刚才创建的图片仓库。
 
 **构建设置**：全部保持默认（因为我们只是存图，不需要编译），直接点击 **保存并部署**。
 
@@ -462,7 +452,7 @@ PicGo 需要你的授权才能把图片推送到你的 GitHub 仓库。
 1. 在 PicGo 的左侧菜单找到 **图床设置** -> 选择 **GitHub 图床**。
 2. 按照以下格式准确填写你的信息：
 
-- **设定仓库名**：根据你之前截图里的信息，填写你的用户名和仓库名：`zhicbr/zhicbr-quartz-images`
+- **设定仓库名**：根据你之前截图里的信息，填写你的用户名和仓库名：`your-repo-name/your-repo-name-quartz-images`
 
 - **设定分支名**：目前 GitHub 默认的主分支通常是 main，填入：`main`
 
@@ -487,7 +477,7 @@ https://img.example.com
 
 打开 PicGo 的 **上传区**，点击“剪贴板图片上传”。
 
-留意电脑右下角的弹窗提示。如果提示“上传成功”，你去随便找个文本框粘贴一下，如果粘贴出来的链接是你漂亮的自定义域名（例如 `https://img.你的域名.com/images/xxx.png`），并且能在浏览器里打开，那么恭喜你，图床配置完美收工！
+留意电脑右下角的弹窗提示。如果提示“上传成功”，你去随便找个文本框粘贴一下，如果粘贴出来的链接是你漂亮的自定义域名（例如 `https://img.你的域名.com/images/xxx.png`），并且能在浏览器里打开，即成功。
 
 
 
@@ -584,6 +574,82 @@ https://img.example.com
   - `styles/`：全站的 CSS 样式文件，之前修改的 `custom.scss` 就在这里。
 - **`quartz.config.ts` (全局属性)**：控制整个网站的“宏观属性”。比如网站的名字、全局使用什么字体、日间/夜间模式的主题色等。
 - **`quartz.layout.ts` (页面骨架)**：控制网页的“排版”。你可以在这里决定左边栏放什么组件（比如最近更新），右边栏放什么组件（比如文章目录和知识图谱）。
+
+## 新增组件
+
+读取 `content/` 中的元数据 ➡️ 根据 `quartz.layout.ts` 抓取对应的 `components/` ➡️ 将数据喂给组件生成 HTML ➡️ 套上 `styles/` 的 CSS 样式 ➡️ 最终输出成漂亮的静态网页。
+
+### 数据源
+
+`content/`
+
+### 组件UI&核心逻辑
+
+`quartz/components/`
+
+功能组件库。以 `.tsx`（TypeScript + React 语法）编写。它们负责接收原始数据（比如所有的文章列表），然后把数据变成带有 HTML 标签的网页模块。
+
+所有的页面元素（比如侧边栏目录、搜索框、面包屑导航）都在这里
+
+### index.ts
+
+注册登记。
+
+### 页面布局
+
+`quartz.layout.ts`,决定了组建的位置。
+
+#### 三大核心
+
+Quartz 把所有的页面分成了三种渲染情境，也就是代码中导出的三个常量：
+
+- **`sharedPageComponents` (全局共享)**：全站所有页面的“页眉”和“页脚”。
+- **`defaultContentPageLayout` (内容页)**：每篇 Markdown 笔记的样子
+- **`defaultListPageLayout` (列表页)**：点击一个 `#标签` 或者一个 `文件夹` 时，Quartz 自动生成的那个“文件列表”页面
+
+#### 内容页
+
+Quartz 把单篇笔记的页面划分成了几个**插槽 (Slots)**，只需要把组件塞进数组里即可。
+
+##### 插槽 A：`beforeBody` (正文上方区域)
+
+这里的内容会显示在文章大标题和正文内容之间。
+
+##### 插槽 B：`left` (左侧边栏)
+
+网站的导航枢纽。
+
+#####  插槽 C：`right` (右侧边栏)
+
+辅助阅读区域：知识图谱，反向链接
+
+##### 高级技巧
+
+**`ConditionalRender` (条件渲染)**
+
+高阶包裹组件 `Flex` 和 `MobileOnly`
+
+组件内传参过滤 `filterFn`
+
+
+
+#### 列表页
+
+**保持左侧导航不变，清空右侧边栏 (`right: []`)**。
+
+
+
+
+
+### CSS样式
+
+`quartz/styles/custom.scss`
+
+组件视觉美化
+
+自定义的样式写在 `custom.scss` 里，这样下次 Quartz 更新底层代码时，自定义样式就不会被覆盖丢失。
+
+### 
 
 
 
@@ -706,10 +772,10 @@ tag必须小写，否则会导致tag大写的文件在tag界面无法显示。
 
 ## ToDo
 
-### 文件夹
+### 目录组织策略：文件夹
 
 将所有笔记分类，应该弄哪些文件夹？
-
+杜威十进制分类法（按领域划分）
 ### [:white_check_mark: ]图片
 
 #### 存储
@@ -772,3 +838,4 @@ obsidian默认wiki链接，但是Typora不支持，只支持md格式。
 
 ## 总结
 
+本记录可直接作为vibe coding进行Quartz的自定义改造的参考。

@@ -1,5 +1,5 @@
 ---
-title: How to use SCRCPY for screen mirroring
+title: 使用scrcpy投屏
 date: 2026-02-26
 tags: 
   - tutorial
@@ -355,6 +355,24 @@ adb usb
 ```
 scrcpy -s 192.168.0.100:38407 -b 2M -m 1024 -S -w --no-audio
 ```
+
+
+
+# 情景
+
+## TL;DR
+
+### 有线快速开始
+
+
+
+### 无线快速开始
+
+
+
+## 没有wifi如何无线连接
+
+
 
 
 

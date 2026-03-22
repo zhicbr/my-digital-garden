@@ -1,5 +1,5 @@
 ---
-title: How to Use Xiaoqin Input Method -- Trying Out Open Source Input Methods
+title: 使用开源输入法
 date: 2026-02-26
 tags: 
   - tutorial
